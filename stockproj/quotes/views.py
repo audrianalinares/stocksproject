@@ -15,8 +15,7 @@ def home(request):
         return render(request, 'home.html', {'api' : api})
 
         else:
-            
-        return render(request, 'home.html', {'ticker': "Enter a ticker symbol above..."})
+            return render(request, 'home.html', {'ticker': "Enter a ticker symbol above..."})
 
  
 
@@ -24,3 +23,5 @@ def about(request):
     return render(request, 'about.html', {})
 
 #pk_2d493df3ace74135846b58fb4fc7eeb9
+def add_stock(request):
+    return render(request, 'add_stock.html', {})

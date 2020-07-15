@@ -41,6 +41,18 @@
       </nav>
     <div class="container">
     <br/>
+
+      {% if messages %}
+    {% for messages in messages %}
+      <div class="alert alert-warning alert-dissmissable
+      " role="alert">
+          <button class="close" data-dismiss="alert">
+            <small><sup>x</sup></small>
+          </button>
+          {{ message }}
+        </div><br/>
+        {% endfor %}
+      {% endif %}
     
     </div>
     <!-- Optional JavaScript -->

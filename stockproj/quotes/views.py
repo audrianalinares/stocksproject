@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Stock
+from .forms import StockForm
+from django.contrib import messages
 
 def home(request):
     import requests
@@ -32,6 +34,20 @@ def about(request):
 
 #pk_2d493df3ace74135846b58fb4fc7eeb9
 def add_stock(request):
+    if request.method == 'POST':
+        form = StockForm(request.POST or None)
 
-    ticket = Stock.objects.all()
-    return render(request, 'add_stock.html', {'ticker' : ticker})
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("Stock has been added!"))
+            return redirect('add_stock')
+
+    else:
+        ticker = Stock.objects.all()
+        return render(request, 'add_stock.html', {'ticker' : ticker})
+
+def delete(request, stock_id):
+    item = Stock.objects.get(pk=stock_id)
+    item.delete()
+    messages.success(request, ("Stock Has Been Deleted!"))
+    return redirect(add_stock)
